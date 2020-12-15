@@ -1,0 +1,11 @@
+<button class="btn btn-warning" (click)="clickToRecord()">Display Details</button>
+<p *ngIf="showDetails==true">
+    Secret Password: Tuna
+</p>
+<ul>
+    <li
+     *ngFor = "let s of logButtonClick; let idx = index"
+     [ngStyle]= "{backgroundColor: idx>4?'blue':'transparent' }"
+     [ngClass]="{'white-text' : idx>4}"
+    >{{s}}</li>
+</ul>
