@@ -4,30 +4,12 @@
   </div>
 </div>
 <hr />
-
 <div class="row">
   <div class="col-xl-12">
-    <div class="card-group clearfix" *ngFor="let recipe of recipes">
-      <div class="card mb-3" style="max-width: 540px">
-        <a class="card-block stretched-link text-decoration-none" href="#">
-          <div class="row no-gutters">
-            <div class="col-md-8">
-              <div class="card-body">
-                <h5 class="card-title">{{ recipe.name }}</h5>
-                <p class="card-text">{{ recipe.description }}</p>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <img
-                [src]="recipe.imagePath"
-                alt="{{ recipe.name }}"
-                class="card-img"
-              />
-            </div>
-          </div>
-        </a>
-      </div>
-    </div>
-    <app-recipe-item></app-recipe-item>
+    <app-recipe-item
+      *ngFor="let recipeEl of recipes"
+      [recipe]="recipeEl"
+      (recipeSelected)="onRecipeSelected(recipeEl)"
+    ></app-recipe-item>
   </div>
 </div>
