@@ -10,7 +10,6 @@ export class HeaderComponent{
    @Output('featureClicked') featureSelected = new EventEmitter<string>();
 
     onSelect(feature: string){
-        //console.log(feature);
         this.featureSelected.emit(feature);
     }
 }
