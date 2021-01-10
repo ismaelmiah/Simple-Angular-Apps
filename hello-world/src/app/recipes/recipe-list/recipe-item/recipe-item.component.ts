@@ -6,7 +6,6 @@ import { RecipeService } from '../../recipe.service';
   selector: 'app-recipe-item',
   templateUrl: './recipe-item.component.html',
   styleUrls: ['./recipe-item.component.css'],
-  providers: [RecipeService],
 })
 export class RecipeItemComponent implements OnInit {
   @Input() recipe: Recipe;
