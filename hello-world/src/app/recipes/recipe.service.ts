@@ -12,6 +12,7 @@ export class RecipeService {
   
   private recipes: Recipe[] = [
     new Recipe(
+      1,
       'A test Recipe',
       'This is simply a test',
       'https://i2.wp.com/www.downshiftology.com/wp-content/uploads/2018/12/Shakshuka-19.jpg',
@@ -21,6 +22,7 @@ export class RecipeService {
       ]
     ),
     new Recipe(
+      2,
       'A very Recipe',
       'This is simply a test',
       'https://i2.wp.com/www.downshiftology.com/wp-content/uploads/2018/12/Shakshuka-19.jpg',
@@ -33,6 +35,15 @@ export class RecipeService {
 
   getRecipes() {
     return this.recipes.slice();
+  }
+
+  getRecipe(id: number) {
+    const recipe = this.recipes.find(
+      (s) => {
+        return s.id === id;
+      }
+    );
+    return recipe;
   }
 
   addIngredientsToShoppingList(ingredient: Ingredient[]){
