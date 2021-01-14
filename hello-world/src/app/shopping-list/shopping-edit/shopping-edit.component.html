@@ -1,22 +1,41 @@
 <div class="row">
   <div class="col-xl-12">
-    <form (ngSubmit)="onSubmit()" [formGroup]="shoppingEdit">
+    <form (ngSubmit)="onSubmit()" [formGroup]="shoppingForm">
       <div class="row">
         <div class="col-sm-5 form-group">
           <label for="name">Name</label>
-          <input type="text" id="name" formControlName="name" class="form-control" />
+          <input
+            type="text"
+            id="name"
+            formControlName="name"
+            class="form-control"
+          />
         </div>
         <div class="col-sm-2 form-group">
           <label for="amount">Amount</label>
-          <input type="number" id="amount" formControlName="amount" class="form-control"/>
+          <input
+            type="number"
+            id="amount"
+            formControlName="amount"
+            class="form-control"
+          />
         </div>
       </div>
       <div class="row">
         <div class="col-xl-12">
-          <button class="btn btn-success" [disabled]="!shoppingEdit.valid" type="submit" (click)="onAddItem()">
-            Add
+          <button
+            class="btn btn-success mr-2"
+            [disabled]="!shoppingForm.valid"
+            type="submit"
+          >
+            {{ editMode ? "Update" : "Add" }}
           </button>
-          <button class="btn btn-danger" type="button" (click)="onDeleteItem()">
+          <button
+            class="btn btn-danger mr-2"
+            type="button"
+            *ngIf="editMode"
+            (click)="onDeleteItem()"
+          >
             Delete
           </button>
           <button class="btn btn-primary" type="button" (click)="onClearItem()">
