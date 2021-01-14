@@ -1,4 +1,5 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Ingredient } from 'src/app/shared/Ingredient.model';
 import { ShoppingListService } from '../shopping-list-service';
 
@@ -8,18 +9,25 @@ import { ShoppingListService } from '../shopping-list-service';
   styleUrls: ['./shopping-edit.component.css'],
 })
 export class ShoppingEditComponent implements OnInit {
-  @ViewChild('nameInput') nameInputRef: ElementRef;
-  @ViewChild('amountInput') amountInputRef: ElementRef;
-
-  //ingredientAdded = new EventEmitter<{name: string, amount: number}>();
+  shoppingEdit: FormGroup;
 
   constructor(private shoppingListService: ShoppingListService) {}
 
-  ngOnInit(): void {}
-
+  ngOnInit(): void {
+    this.shoppingEdit = new FormGroup({
+      name: new FormControl(null, Validators.required),
+      amount: new FormControl(null, [
+        Validators.required,
+        Validators.pattern('^[1-9]+[0-9]*$'),
+      ]),
+    });
+  }
+  onSubmit() {
+    console.log(this.shoppingEdit.value);
+  }
   onAddItem() {
-    const ingName = this.nameInputRef.nativeElement.value;
-    const ingAmount = this.amountInputRef.nativeElement.value;
+    const ingName = this.shoppingEdit.get('name').value;
+    const ingAmount = this.shoppingEdit.get('amount').value;
     const newIngredient = new Ingredient(ingName, ingAmount);
     this.shoppingListService.addIngredient(newIngredient);
   }
@@ -27,7 +35,6 @@ export class ShoppingEditComponent implements OnInit {
   onDeleteItem() {}
 
   onClearItem() {
-    this.nameInputRef.nativeElement.value = '';
-    this.amountInputRef.nativeElement.value = '';
+    this.shoppingEdit.reset();
   }
 }
